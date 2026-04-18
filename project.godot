@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 BehaviorUtils="*res://game/utils/BehaviorUtils.gd"
+ProcessPriority="*res://game/utils/ProcessPriority.gd"
 
 [display]
 

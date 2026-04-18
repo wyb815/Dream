@@ -16,7 +16,6 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	else:
-		velocity.y = 0
 		if _check_on_cliff():
 			# 遇到悬崖走反方向
 			direction = -direction
@@ -27,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	move_and_slide(velocity, up_dir)
+	velocity = move_and_slide(velocity, up_dir)
 	
 	if _is_touching_wall():
 		# 碰到墙
