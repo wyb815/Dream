@@ -1,19 +1,15 @@
 extends Area2D
 
+tool
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+export(Vector2) var size setget set_size,get_size
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	pass
+func set_size(val: Vector2):
+	if Engine.editor_hint:
+		($CollisionShape2D.shape as RectangleShape2D).extents = val
+	
+func get_size():
+	return ($CollisionShape2D.shape as RectangleShape2D).extents
 
 func _on_AntiGravity_body_entered(body):
 	_on_AntiGravity_change(body, true)
