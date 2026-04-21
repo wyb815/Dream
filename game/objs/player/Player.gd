@@ -9,6 +9,7 @@ var height := 150
 
 var is_follow := false
 var follow_v := Vector2(0, 0)
+var is_on_platform := false
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
@@ -18,11 +19,9 @@ func _physics_process(delta: float) -> void:
 	if is_follow:
 		_handle_follow()
 		return
+		
+	velocity.y += gravity * delta
 	
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	# Handle jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY * up_dir.y
 
@@ -45,3 +44,4 @@ func _handle_follow():
 	
 	velocity = follow_v
 	move_and_slide(velocity, up_dir)
+

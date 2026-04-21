@@ -5,11 +5,14 @@ tool
 export(Vector2) var size setget set_size,get_size
 
 func set_size(val: Vector2):
-	if Engine.editor_hint:
-		($CollisionShape2D.shape as RectangleShape2D).extents = val
+	if !$col:
+		return
+	($col.shape as RectangleShape2D).extents = val
 	
 func get_size():
-	return ($CollisionShape2D.shape as RectangleShape2D).extents
+	if !$col:
+		return Vector2.ZERO
+	return ($col.shape as RectangleShape2D).extents
 
 func _on_AntiGravity_body_entered(body):
 	_on_AntiGravity_change(body, true)

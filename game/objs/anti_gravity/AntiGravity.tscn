@@ -10,7 +10,7 @@ gravity = -980.0
 script = ExtResource( 1 )
 size = Vector2( 200, 200 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="col" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_AntiGravity_body_entered"]
