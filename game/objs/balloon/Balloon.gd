@@ -8,6 +8,7 @@ var vel := Vector2()
 var end_pos: Vector2
 var start_pos: Vector2
 var is_start_move := false
+var reach_stay_time := 0.0
 
 onready var handle := $handle
 
@@ -28,11 +29,16 @@ func _physics_process(delta):
 	var target_pos = get_parent().to_local(end_pos)
 			
 	if target_pos == position:
-		if catched_by_area:
-			catched_by_area.get_parent().is_follow = false;
-			catched_by_area = null
-		position = start_pos
-		is_start_move = false
+		if reach_stay_time > 0:
+			reach_stay_time -= delta
+			if catched_by_area:
+				catched_by_area.get_parent().follow_v = Vector2.ZERO
+		else:
+			if catched_by_area:
+				catched_by_area.get_parent().is_follow = false;
+				catched_by_area = null
+			position = start_pos
+			is_start_move = false
 		return
 
 	var calc_pos = position.move_toward(target_pos, move_speed * delta)
@@ -44,6 +50,7 @@ func _physics_process(delta):
 	else:
 		# 到达目的地
 		final_vel = move_and_slide(move_offset / delta, Vector2.UP)
+		reach_stay_time = 0.5
 		
 	if catched_by_area:
 		if catched_by_area.get_parent().is_follow:
