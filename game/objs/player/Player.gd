@@ -11,10 +11,14 @@ var is_follow := false
 var follow_v := Vector2(0, 0)
 var is_on_platform := false
 var jump_apply_left_time := 0.0
+var born_pos := Vector2()
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
 onready var con = $con
+
+func _ready():
+	born_pos = global_position
 
 func _physics_process(delta: float) -> void:
 	if is_follow:
