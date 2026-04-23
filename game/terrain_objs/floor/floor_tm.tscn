@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="floor_tm" type="TileMap"]
+cell_size = Vector2( 80, 80 )
+cell_custom_transform = Transform2D( 80, 0, 0, 80, 0, 0 )
+format = 1
