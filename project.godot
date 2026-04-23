@@ -64,6 +64,12 @@ ui_down={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="common"
+2d_physics/layer_2="player"
+2d_physics/layer_3="balloon"
+
 [physics]
 
 common/enable_pause_aware_picking=true
