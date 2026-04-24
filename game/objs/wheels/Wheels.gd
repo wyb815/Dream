@@ -59,7 +59,8 @@ func _physics_process(delta):
 		var rotation = next_rotation + i * (360.0 / count)
 		var pos = Vector2(radius * cos(deg2rad(rotation)), radius * sin(deg2rad(rotation)))
 		
-		child.position = pos
+		var offset = pos - child.position
+		child.position += offset
 						
 	cur_rotation = next_rotation
 			

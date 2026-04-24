@@ -24,34 +24,34 @@ func _physics_process(delta: float) -> void:
 	if is_follow:
 		_handle_follow()
 		return
-		
-	velocity.y += gravity * delta
 	
-	var isJumpPressed = Input.is_action_pressed("ui_accept");
-	
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		jump_apply_left_time = 0.5
-		velocity.y = JUMP_VELOCITY * up_dir.y
+	if is_on_floor():
+		# 要把设成 0，才能站在蜗牛的头上
+		velocity.y = 0
 	else:
-		if Input.is_action_pressed("ui_accept"):
-			jump_apply_left_time -= delta
-		else:
-			if jump_apply_left_time > 0:
+		velocity.y += gravity * delta
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_on_floor():
+			jump_apply_left_time = 0.5
+			velocity.y = JUMP_VELOCITY * up_dir.y
+	else:
+		if jump_apply_left_time > 0:
+			if Input.is_action_pressed("ui_accept"):
+				jump_apply_left_time -= delta
+			else:
 				#松开跳跃键，跳的近一些
 				velocity.y *= 0.3
 				jump_apply_left_time = 0
 			
 	
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	velocity = move_and_slide(velocity, up_dir)
+	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	
 func _handle_follow():
 	if Input.is_action_just_pressed("ui_accept"):

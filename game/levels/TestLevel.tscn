@@ -25,7 +25,7 @@ tile_data = PoolIntArray( -589829, 0, 2, -524293, 0, 65539, -524292, 0, 65539, -
 tile_data = PoolIntArray( -11, 0, 2, -10, 0, 2, -9, 0, 2, -8, 0, 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -345, -16 )
+position = Vector2( 1869, 142 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 3 )]
 

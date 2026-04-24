@@ -12,7 +12,10 @@ onready var rayCastL := $rayCastL as RayCast2D
 onready var rayCastR := $rayCastR as RayCast2D
 
 func _physics_process(delta: float) -> void:	
-	velocity.y += gravity * delta
+	if is_on_floor():
+		velocity.y = 0
+	else:
+		velocity.y += gravity * delta
 	
 	if is_on_floor():
 		if _check_on_cliff():
