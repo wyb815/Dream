@@ -27,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	velocity = move_and_slide(velocity, up_dir)
+	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	
 	if _is_touching_wall():
 		# 碰到墙
@@ -53,13 +53,3 @@ func _is_touching_wall() -> bool:
 		if abs(normal.x) > 0.5:  # 水平方向
 			return true
 	return false
-	
-func on_anti_gravity(is_anti: bool):
-	var height = 40
-	if is_anti:
-		scale.y = -1
-		position.y -= height
-	else:
-		scale.y = 1
-		position.y += height
-	move_and_slide(Vector2.ZERO, up_dir)
