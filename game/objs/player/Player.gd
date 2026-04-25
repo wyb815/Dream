@@ -29,8 +29,14 @@ func _physics_process(delta: float) -> void:
 		# 要把设成 0，才能站在蜗牛的头上
 		velocity.y = 0
 	else:
-		velocity.y += gravity * delta
+		velocity.y += gravity * delta		
 	
+	var direction := Input.get_axis("ui_left", "ui_right")
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
 			jump_apply_left_time = 0.5
@@ -43,14 +49,7 @@ func _physics_process(delta: float) -> void:
 				#松开跳跃键，跳的近一些
 				velocity.y *= 0.3
 				jump_apply_left_time = 0
-			
-	
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
+
 	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	
 func _handle_follow():
