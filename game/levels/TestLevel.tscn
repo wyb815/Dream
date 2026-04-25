@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/terrain/test/test.tres" type="TileSet" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://game/objs/wheels/Wheels.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=9]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_con.tscn" type="PackedScene" id=10]
+[ext_resource path="res://game/objs/wheels/WheelsNode.tscn" type="PackedScene" id=11]
 
 [node name="TestLevel" type="Node2D"]
 
@@ -25,7 +26,7 @@ tile_data = PoolIntArray( -589829, 0, 2, -524293, 0, 65539, -524292, 0, 65539, -
 tile_data = PoolIntArray( -11, 0, 2, -10, 0, 2, -9, 0, 2, -8, 0, 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( -176, -56 )
+position = Vector2( 322, -39 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 3 )]
 
@@ -33,8 +34,7 @@ position = Vector2( -176, -56 )
 position = Vector2( 85, -6 )
 
 [node name="AntiGravity" parent="." instance=ExtResource( 5 )]
-position = Vector2( 295, -342 )
-size = Vector2( 400, 500 )
+position = Vector2( 978, -1307 )
 
 [node name="Balloon" parent="." instance=ExtResource( 6 )]
 position = Vector2( -309, -209 )
@@ -43,8 +43,49 @@ balloon_end = NodePath("../BalloonEnd")
 [node name="BalloonEnd" parent="." instance=ExtResource( 7 )]
 position = Vector2( -556, -413 )
 
+[node name="Wheels2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1600, -1581 )
+radius = 400
+count = 6
+
+[node name="WheelsNode7" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 400, 0 )
+
+[node name="WheelsNode8" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 200, 346.41 )
+
+[node name="WheelsNode9" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -200, 346.41 )
+
+[node name="WheelsNode10" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -400, 4.89859e-14 )
+
+[node name="WheelsNode11" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -200, -346.41 )
+
+[node name="WheelsNode12" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 200, -346.41 )
+
+[node name="WheelsNode13" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 400, 0 )
+
+[node name="WheelsNode14" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 200, 346.41 )
+
+[node name="WheelsNode15" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -200, 346.41 )
+
+[node name="WheelsNode16" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -400, 4.89859e-14 )
+
+[node name="WheelsNode17" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( -200, -346.41 )
+
+[node name="WheelsNode18" parent="Wheels2" instance=ExtResource( 11 )]
+position = Vector2( 200, -346.41 )
+
 [node name="Wheels" parent="." instance=ExtResource( 8 )]
-position = Vector2( -1237, -1005 )
+position = Vector2( 1012, -646 )
 radius = 400
 count = 6
 
@@ -52,13 +93,13 @@ count = 6
 position = Vector2( -1143, -166 )
 
 [node name="Snail3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 997, -158 )
+position = Vector2( 3595, 520 )
 
 [node name="Snail4" parent="." instance=ExtResource( 4 )]
 position = Vector2( -849, 236 )
 
 [node name="Snail5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 466, -83 )
+position = Vector2( 85, -46 )
 
 [node name="Snail6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 60, -729 )
