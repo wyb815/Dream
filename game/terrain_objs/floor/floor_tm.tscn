@@ -1,6 +1,10 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/terrain/test/test.tres" type="TileSet" id=1]
 
 [node name="floor_tm" type="TileMap"]
+tile_set = ExtResource( 1 )
 cell_size = Vector2( 80, 80 )
 cell_custom_transform = Transform2D( 80, 0, 0, 80, 0, 0 )
 format = 1
+tile_data = PoolIntArray( 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539, 6, 0, 65539, 7, 0, 65539, 8, 0, 65539, 9, 0, 65539, 10, 0, 65539, 11, 0, 65539, 12, 0, 65539 )

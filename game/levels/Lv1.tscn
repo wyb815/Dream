@@ -1,0 +1,42 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_con.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/objs/balloon/Balloon.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/objs/balloon/BalloonEnd.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/objs/goal/Goal.tscn" type="PackedScene" id=9]
+
+[node name="Lv1" type="Node2D"]
+
+[node name="floor_tm" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -917473, 0, 65539, -917472, 0, 65539, -917471, 0, 65539, -917470, 0, 65539, -917469, 0, 65539, -917468, 0, 65539, -851937, 0, 65539, -851931, 0, 65539, -786401, 0, 65539, -786394, 0, 65539, -720865, 0, 65539, -720857, 0, 65539, -655329, 0, 65539, -655320, 0, 65540, -589793, 0, 65539, -589783, 0, 65540, -524257, 0, 65539, -524246, 0, 65540, -458721, 0, 65539, -458709, 0, 65540, -393185, 0, 65539, -393172, 0, 65540, -327649, 0, 65539, -327635, 0, 65540, -262126, 0, 65539, -262125, 0, 65539, -262124, 0, 65539, -262113, 0, 65539, -262098, 0, 65540, -196590, 0, 65539, -196589, 0, 65539, -196588, 0, 65539, -196577, 0, 65539, -196561, 0, 65540, -131057, 0, 65539, -131056, 0, 65539, -131055, 0, 65539, -131054, 0, 65539, -131053, 0, 65539, -131052, 0, 65539, -131041, 0, 65539, -131024, 0, 65540, -131016, 0, 1, -65521, 0, 65539, -65520, 0, 65539, -65519, 0, 65539, -65518, 0, 65539, -65517, 0, 65539, -65516, 0, 65539, -65505, 0, 65539, -65487, 0, 65540, -65486, 0, 65540, -65485, 0, 65540, -65484, 0, 65540, -65483, 0, 65540, -65482, 0, 65540, -65481, 0, 65540, -65480, 0, 65540, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539, 6, 0, 65539, 7, 0, 65539, 8, 0, 65539, 9, 0, 65539, 10, 0, 65539, 11, 0, 65539, 12, 0, 65539, 13, 0, 65539, 14, 0, 65539, 15, 0, 65539, 16, 0, 65539, 17, 0, 65539, 18, 0, 65539, 19, 0, 65539, 20, 0, 65539, 31, 0, 65539 )
+
+[node name="arrow_con" parent="." instance=ExtResource( 5 )]
+
+[node name="arrow_tm" parent="arrow_con" instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 21, 0, 2, 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 0, 2, 28, 0, 2, 29, 0, 2, 30, 0, 2 )
+
+[node name="Snail" parent="." instance=ExtResource( 2 )]
+position = Vector2( 956, -11 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 57, -5 )
+
+[node name="LevelCamera" parent="." instance=ExtResource( 4 )]
+
+[node name="Snail2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2856, -1126 )
+
+[node name="Balloon" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1625, -494 )
+balloon_end = NodePath("../BalloonEnd")
+
+[node name="BalloonEnd" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2522, -1397 )
+
+[node name="Goal" parent="." instance=ExtResource( 9 )]
+position = Vector2( 4494, -168 )

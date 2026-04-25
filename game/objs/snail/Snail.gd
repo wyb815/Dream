@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const SPEED := 50
 
-var direction := 1.0
+var direction := -1.0
 var velocity = Vector2()
 var up_dir := Vector2(0, -1)
 var height := 40;
