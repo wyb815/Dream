@@ -50,7 +50,7 @@ func _physics_process(delta):
 	else:
 		# 到达目的地
 		final_vel = move_and_slide(move_offset / delta, Vector2.UP)
-		reach_stay_time = 0.5
+		reach_stay_time = 0.3
 		
 	if catched_by_area:
 		if catched_by_area.get_parent().is_follow:
