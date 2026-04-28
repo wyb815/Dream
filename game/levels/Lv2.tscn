@@ -24,15 +24,15 @@ tile_data = PoolIntArray( 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 
 [node name="LevelCamera" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1705, -17 )
+position = Vector2( 65, -7 )
 
 [node name="AntiGravity" parent="." instance=ExtResource( 4 )]
 position = Vector2( 800, -312 )
-size = Vector2( 600, 400 )
+size = Vector2( 400, 400 )
 
 [node name="Snail" parent="." instance=ExtResource( 7 )]
-position = Vector2( 245, -15 )
-direction = 1.0
+position = Vector2( 343, -13 )
+move_left = false
 
 [node name="Balloon" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1801, -250 )
@@ -43,7 +43,7 @@ position = Vector2( 2500, -283 )
 
 [node name="AntiGravity2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 3146, -382 )
-size = Vector2( 600, 400 )
+size = Vector2( 400, 400 )
 
 [node name="Snail2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2761, -677 )
