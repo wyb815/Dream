@@ -45,11 +45,13 @@ balloon_end = NodePath("../BalloonEnd")
 position = Vector2( 420, -952 )
 
 [node name="Wheels2" parent="." instance=ExtResource( 8 )]
+process_priority = -100
 position = Vector2( 2049, -1646 )
 radius = 400
 count = 6
 
 [node name="Wheels" parent="." instance=ExtResource( 8 )]
+process_priority = -100
 position = Vector2( 1012, -646 )
 radius = 400
 count = 6

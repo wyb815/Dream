@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/objs/wheels/Wheels.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_con.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=7]
+
+[node name="Lv1" type="Node2D"]
+
+[node name="floor_tm" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539 )
+
+[node name="arrow_con" parent="." instance=ExtResource( 5 )]
+
+[node name="arrow_tm" parent="arrow_con" instance=ExtResource( 6 )]
+
+[node name="LevelCamera" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 57, -5 )
+
+[node name="Wheels" parent="." instance=ExtResource( 2 )]
+process_priority = -100
+position = Vector2( 893, -371 )
+count = 6
+
+[node name="Snail" parent="." instance=ExtResource( 7 )]
+position = Vector2( 737, -125 )
+
+[node name="Snail2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1224, -392 )
+
+[node name="Wheels2" parent="." instance=ExtResource( 2 )]
+process_priority = -100
+position = Vector2( -396, 133 )
+count = 3
+
+[node name="Wheels3" parent="." instance=ExtResource( 2 )]
+process_priority = -100
+position = Vector2( -382, -376 )
+count = 3

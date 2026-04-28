@@ -4,9 +4,11 @@ tool
 
 var wheels_node = preload('./WheelsNode.tscn')
 var cur_rotation := 0.0
+var is_ready := false
 
-export(int) var radius := 150 setget set_radius
-export(int) var count := 8 setget set_count,get_count
+export var anti_clock := false
+export var radius := 150 setget set_radius
+export var count := 8 setget set_count,get_count
 
 func set_count(val: int):
 	count = val
@@ -28,16 +30,13 @@ func get_count():
 	
 func set_radius(val):
 	radius = val
-	set_count(count)
+	_update_child_pos()
 	
 func get_radius():
 	return radius
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if Engine.editor_hint:
-		return
-		
 	set_count(get_count())
 	set_process_priority(ProcessPriority.WHEELS)
 
@@ -47,7 +46,8 @@ func _physics_process(delta):
 		return
 	
 	# 转速，多少秒一圈
-	var speed := 360.0 / 10.0
+	var dir := -1.0 if anti_clock else 1.0
+	var speed := 360.0 / 10.0 * dir
 	var pass_degree = delta * speed
 	var next_rotation = cur_rotation + pass_degree
 	var count = get_count()
