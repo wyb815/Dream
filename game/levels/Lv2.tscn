@@ -23,10 +23,6 @@ tile_data = PoolIntArray( 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 65, -7 )
 
-[node name="AntiGravity" parent="." instance=ExtResource( 4 )]
-position = Vector2( 800, -312 )
-size = Vector2( 700, 500 )
-
 [node name="Snail" parent="." instance=ExtResource( 7 )]
 position = Vector2( 343, -13 )
 move_left = false
@@ -38,12 +34,16 @@ balloon_end = NodePath("../BalloonEnd")
 [node name="BalloonEnd" parent="." instance=ExtResource( 9 )]
 position = Vector2( 2500, -283 )
 
-[node name="AntiGravity2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 3146, -382 )
-size = Vector2( 700, 500 )
-
 [node name="Snail2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2761, -677 )
 
 [node name="Goal" parent="." instance=ExtResource( 10 )]
 position = Vector2( 2975, -931 )
+
+[node name="AntiGravity" parent="." instance=ExtResource( 4 )]
+position = Vector2( 839, -210 )
+size = Vector2( 880, 700 )
+
+[node name="AntiGravity2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 2594, -497 )
+size = Vector2( 300, 500 )

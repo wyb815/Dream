@@ -2,17 +2,16 @@ extends Area2D
 
 tool
 
-export(Vector2) var size setget set_size,get_size
+export(Vector2) var size setget set_size
 
 func set_size(val: Vector2):
+	size = val
 	if !$col:
 		return
-	($col.shape as RectangleShape2D).extents = val
+	($col.shape as RectangleShape2D).extents = Vector2.ZERO if val == Vector2.ZERO else val / 2
 	
-func get_size():
-	if !$col:
-		return Vector2.ZERO
-	return ($col.shape as RectangleShape2D).extents
+func _ready():
+	set_size(size)
 
 func _on_AntiGravity_body_entered(body):
 	_on_AntiGravity_change(body, true)

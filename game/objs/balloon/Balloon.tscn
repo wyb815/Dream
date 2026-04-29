@@ -10,6 +10,7 @@ load_path = "res://.import/circle.png-58956db1dc40c81913deecd25b822a90.stex"
 radius = 30.0
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 20.0
 
 [node name="Balloon" type="KinematicBody2D"]
 collision_layer = 4

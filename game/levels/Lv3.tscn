@@ -20,7 +20,7 @@ tile_data = PoolIntArray( -1834973, 0, 2, -1834972, 0, 2, -1834971, 0, 2, -18349
 [node name="LevelCamera" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2332, -743 )
+position = Vector2( 2332, -734 )
 
 [node name="Wheels" parent="." instance=ExtResource( 2 )]
 position = Vector2( 893, -371 )
@@ -47,7 +47,7 @@ count = 3
 
 [node name="AntiGravity" parent="." instance=ExtResource( 8 )]
 position = Vector2( 3437, -1598 )
-size = Vector2( 700, 500 )
+size = Vector2( 1400, 1000 )
 
 [node name="Goal" parent="." instance=ExtResource( 9 )]
 position = Vector2( 4652, -1818 )
