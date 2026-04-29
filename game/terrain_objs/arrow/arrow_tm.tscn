@@ -2,9 +2,9 @@
 
 [ext_resource path="res://game/terrain/test/test.tres" type="TileSet" id=1]
 
-[node name="arrow_tm" type="TileMap"]
+[node name="arrow_tm" type="TileMap" groups=["arrow"]]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 80, 80 )
 cell_custom_transform = Transform2D( 80, 0, 0, 80, 0, 0 )
-collision_use_parent = true
 format = 1
+tile_data = PoolIntArray( 983060, 0, 65539 )

@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/objs/anti_gravity/AntiGravity.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/terrain_objs/arrow/arrow_con.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/objs/balloon/Balloon.tscn" type="PackedScene" id=8]
@@ -16,9 +15,7 @@
 [node name="floor_tm" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( -720860, 0, 1, -655328, 0, 65539, -655327, 0, 65539, -655326, 0, 65539, -655325, 0, 65539, -655324, 0, 65539, -655323, 0, 65539, -655322, 0, 65539, -655321, 0, 65539, -655320, 0, 65539, -655319, 0, 65539, -458747, 0, 65539, -458746, 0, 65539, -458745, 0, 65539, -458744, 0, 65539, -458743, 0, 65539, -458742, 0, 65539, -458741, 0, 65539, -458740, 0, 65539, -458739, 0, 65539, -458738, 0, 65539, -458737, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539, 6, 0, 65539, 7, 0, 65539, 8, 0, 65539, 9, 0, 65539, 10, 0, 65539, 11, 0, 65539, 12, 0, 65539, 13, 0, 65539, 14, 0, 65539, 15, 0, 65539, 16, 0, 65539, 17, 0, 65539, 18, 0, 65539, 19, 0, 65539, 20, 0, 65539, 21, 0, 65539 )
 
-[node name="arrow_con" parent="." instance=ExtResource( 5 )]
-
-[node name="arrow_tm" parent="arrow_con" instance=ExtResource( 6 )]
+[node name="arrow_tm" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 0, 2, 28, 0, 2, 29, 0, 2, 30, 0, 2, 31, 0, 2, 32, 0, 2, 33, 0, 2, 34, 0, 2 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 2 )]

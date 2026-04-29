@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/objs/wheels/Wheels.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/terrain_objs/arrow/arrow_con.tscn" type="PackedScene" id=5]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
 [ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/objs/anti_gravity/AntiGravity.tscn" type="PackedScene" id=8]
@@ -15,9 +14,7 @@
 [node name="floor_tm" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( -1834956, 0, 65539, -1834955, 0, 65539, -1834954, 0, 65539, -1834953, 0, 65539, -1834952, 0, 65539, -1834951, 0, 65539, -1834950, 0, 65539, -1834949, 0, 65539, -1507269, 0, 1, -1441739, 0, 65539, -1441738, 0, 65539, -1441737, 0, 65539, -1441736, 0, 65539, -1441735, 0, 65539, -1441734, 0, 65539, -1441733, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539 )
 
-[node name="arrow_con" parent="." instance=ExtResource( 5 )]
-
-[node name="arrow_tm" parent="arrow_con" instance=ExtResource( 6 )]
+[node name="arrow_tm" parent="." instance=ExtResource( 6 )]
 tile_data = PoolIntArray( -1834973, 0, 2, -1834972, 0, 2, -1834971, 0, 2, -1834970, 0, 2, -1834969, 0, 2, -1834968, 0, 2, -1834967, 0, 2, -1834966, 0, 2, -1834965, 0, 2, -1834964, 0, 2, -1834963, 0, 2, -1834962, 0, 2, -1834961, 0, 2, -1834960, 0, 2, -1834959, 0, 2, -1834958, 0, 2, -1834957, 0, 2, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 14, 0, 2, 15, 0, 2, 16, 0, 2, 17, 0, 2, 18, 0, 2, 19, 0, 2, 20, 0, 2, 21, 0, 2, 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 0, 2, 28, 0, 2, 29, 0, 2, 30, 0, 2, 31, 0, 2, 32, 0, 2, 33, 0, 2, 34, 0, 2, 35, 0, 2, 36, 0, 2, 37, 0, 2, 38, 0, 2, 39, 0, 2, 40, 0, 2, 41, 0, 2, 42, 0, 2, 43, 0, 2, 44, 0, 2, 45, 0, 2, 46, 0, 2, 47, 0, 2, 48, 0, 2, 49, 0, 2, 50, 0, 2, 51, 0, 2, 52, 0, 2, 53, 0, 2, 54, 0, 2, 55, 0, 2, 56, 0, 2, 57, 0, 2, 58, 0, 2, 59, 0, 2, 60, 0, 2, 61, 0, 2, 62, 0, 2, 63, 0, 2, 64, 0, 2, 65, 0, 2, 66, 0, 2, 67, 0, 2, 68, 0, 2, 69, 0, 2, 70, 0, 2, 71, 0, 2, 72, 0, 2, 73, 0, 2, 74, 0, 2, 75, 0, 2 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 4 )]

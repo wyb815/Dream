@@ -51,6 +51,15 @@ func _physics_process(delta: float) -> void:
 				jump_apply_left_time = 0
 
 	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
+	_check_collide()
+
+func _check_collide():
+	for i in range(get_slide_count()):
+		var collision = get_slide_collision(i)
+		var collider := collision.collider as Node2D
+	
+		if collider.get_groups().has('arrow'):
+			global_position = born_pos
 	
 func _handle_follow():
 	if Input.is_action_just_pressed("ui_accept"):
