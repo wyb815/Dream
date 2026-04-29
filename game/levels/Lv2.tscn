@@ -28,7 +28,7 @@ position = Vector2( 65, -7 )
 
 [node name="AntiGravity" parent="." instance=ExtResource( 4 )]
 position = Vector2( 800, -312 )
-size = Vector2( 400, 400 )
+size = Vector2( 700, 500 )
 
 [node name="Snail" parent="." instance=ExtResource( 7 )]
 position = Vector2( 343, -13 )
@@ -43,7 +43,7 @@ position = Vector2( 2500, -283 )
 
 [node name="AntiGravity2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 3146, -382 )
-size = Vector2( 400, 400 )
+size = Vector2( 700, 500 )
 
 [node name="Snail2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2761, -677 )

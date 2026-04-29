@@ -12,6 +12,8 @@ export var count := 8 setget set_count,get_count
 
 func set_count(val: int):
 	count = val
+	if get_child_count() == val:
+		return
 	while get_child_count() > 0:
 		var child = get_child(0)
 		

@@ -3,5 +3,6 @@
 [ext_resource path="res://game/objs/wheels/Wheels.gd" type="Script" id=1]
 
 [node name="Wheels" type="Node2D"]
+process_priority = -100
 script = ExtResource( 1 )
 radius = 320

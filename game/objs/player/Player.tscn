@@ -3,9 +3,8 @@
 [ext_resource path="res://game/objs/player/Player.gd" type="Script" id=1]
 [ext_resource path="res://game/res/rect.png" type="Texture" id=2]
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 20.0
-height = 110.0
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 20, 75 )
 
 [sub_resource type="CircleShape2D" id=2]
 
@@ -17,7 +16,7 @@ script = ExtResource( 1 )
 position = Vector2( 0, -75 )
 
 [node name="display" type="Sprite" parent="con"]
-scale = Vector2( 0.536, 1.875 )
+scale = Vector2( 0.5, 1.875 )
 texture = ExtResource( 2 )
 
 [node name="name" type="Label" parent="con"]
@@ -32,7 +31,7 @@ valign = 1
 
 [node name="move" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -75 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="hand" type="Area2D" parent="."]
 position = Vector2( 0, -137 )
