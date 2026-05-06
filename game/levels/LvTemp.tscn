@@ -5,7 +5,7 @@
 [ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
 
-[node name="Lv1" type="Node2D"]
+[node name="Lv" type="Node2D"]
 
 [node name="floor_tm" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539 )

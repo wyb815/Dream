@@ -12,6 +12,9 @@ var follow_v := Vector2(0, 0)
 var is_on_platform := false
 var jump_apply_left_time := 0.0
 var born_pos := Vector2()
+# 冲击速度
+var apply_vels := []
+var is_in_apply_vel = false
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
@@ -33,9 +36,11 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
+		is_in_apply_vel = false
 		velocity.x = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		if !is_in_apply_vel || is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
@@ -50,16 +55,25 @@ func _physics_process(delta: float) -> void:
 				velocity.y *= 0.3
 				jump_apply_left_time = 0
 
-	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	_check_collide()
+	# 外部施加的速度
+	if apply_vels.size() > 0:
+		is_in_apply_vel = true;
+		velocity = Vector2.ZERO
+		velocity = apply_vels[0]
+	apply_vels.clear();
+	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 
 func _check_collide():
 	for i in range(get_slide_count()):
 		var collision = get_slide_collision(i)
 		var collider := collision.collider as Node2D
+		var groups = collider.get_groups()
 	
-		if collider.get_groups().has('arrow'):
+		if groups.has('arrow'):
 			global_position = born_pos
+		if groups.has('apply_vel'):
+			apply_vels.append(collision.normal * collider.apply_speed)
 	
 func _handle_follow():
 	if Input.is_action_just_pressed("ui_accept"):

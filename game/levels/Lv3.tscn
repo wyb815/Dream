@@ -9,7 +9,7 @@
 [ext_resource path="res://game/objs/anti_gravity/AntiGravity.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/objs/goal/Goal.tscn" type="PackedScene" id=9]
 
-[node name="Lv1" type="Node2D"]
+[node name="Lv" type="Node2D"]
 
 [node name="floor_tm" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( -1834956, 0, 65539, -1834955, 0, 65539, -1834954, 0, 65539, -1834953, 0, 65539, -1834952, 0, 65539, -1834951, 0, 65539, -1834950, 0, 65539, -1834949, 0, 65539, -1507269, 0, 1, -1441739, 0, 65539, -1441738, 0, 65539, -1441737, 0, 65539, -1441736, 0, 65539, -1441735, 0, 65539, -1441734, 0, 65539, -1441733, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539 )
@@ -20,7 +20,7 @@ tile_data = PoolIntArray( -1834973, 0, 2, -1834972, 0, 2, -1834971, 0, 2, -18349
 [node name="LevelCamera" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 2332, -734 )
+position = Vector2( 87, -250 )
 
 [node name="Wheels" parent="." instance=ExtResource( 2 )]
 position = Vector2( 893, -371 )

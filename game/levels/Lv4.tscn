@@ -10,7 +10,7 @@
 [ext_resource path="res://game/objs/balloon/BalloonEnd.tscn" type="PackedScene" id=8]
 [ext_resource path="res://game/objs/goal/Goal.tscn" type="PackedScene" id=9]
 
-[node name="Lv1" type="Node2D"]
+[node name="Lv" type="Node2D"]
 
 [node name="floor_tm" parent="." instance=ExtResource( 1 )]
 tile_data = PoolIntArray( -720858, 0, 65539, -655323, 0, 65539, -655322, 0, 65539, -589788, 0, 65539, -589787, 0, 65539, -589786, 0, 65539, -262145, 0, 65539, -327677, 0, 65539, -196609, 0, 65539, -262144, 0, 65539, -262143, 0, 65539, -262142, 0, 65539, -262141, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539, 6, 0, 65539, 7, 0, 65539, 8, 0, 65539, 9, 0, 65539, 10, 0, 65539, 11, 0, 65539, 22, 0, 65539, 23, 0, 65539, 24, 0, 65539, 25, 0, 65539, 26, 0, 65539 )
