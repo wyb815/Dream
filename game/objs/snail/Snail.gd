@@ -6,7 +6,6 @@ export var move_left = true
 var direction := -1.0
 var velocity = Vector2()
 var up_dir := Vector2(0, -1)
-var height := 40;
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var rayCastL := $rayCastL as RayCast2D

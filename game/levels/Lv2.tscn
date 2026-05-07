@@ -45,5 +45,5 @@ position = Vector2( 839, -210 )
 size = Vector2( 880, 700 )
 
 [node name="AntiGravity2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 2594, -497 )
-size = Vector2( 300, 500 )
+position = Vector2( 3058, -489 )
+size = Vector2( 1000, 500 )

@@ -35,11 +35,8 @@ func _on_AntiGravity_change(body: Node, is_anti: bool):
 			on_anti_gravity(body, is_anti)
 		
 func on_anti_gravity(body: Node2D, is_anti: bool):
-	var height = body.height
 	if is_anti:
 		body.scale.y = -1
-		body.position.y -= height
 	else:
 		body.scale.y = 1
-		body.position.y += height
 	body.move_and_slide(Vector2.ZERO, body.up_dir)

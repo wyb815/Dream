@@ -5,7 +5,6 @@ const SPEED = 300.0
 const JUMP_VELOCITY = 580.0
 var velocity = Vector2()
 var up_dir := Vector2(0, -1)
-var height := 150
 
 var is_follow := false
 var follow_v := Vector2(0, 0)
