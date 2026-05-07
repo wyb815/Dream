@@ -70,7 +70,7 @@ func _check_collide():
 		var groups = collider.get_groups()
 	
 		if groups.has('arrow'):
-			global_position = born_pos
+			die()
 		if groups.has('apply_vel'):
 			apply_vels.append(collision.normal * collider.apply_speed)
 	
@@ -84,3 +84,8 @@ func _handle_follow():
 	velocity = follow_v
 	move_and_slide(velocity, up_dir)
 
+func die():
+	global_position = born_pos
+	is_follow = false
+	velocity = Vector2.ZERO
+	
