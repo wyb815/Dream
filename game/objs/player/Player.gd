@@ -67,6 +67,10 @@ func _check_collide():
 	for i in range(get_slide_count()):
 		var collision = get_slide_collision(i)
 		var collider := collision.collider as Node2D
+		
+		if !is_instance_valid(collider):
+			continue
+		
 		var groups = collider.get_groups()
 	
 		if groups.has('arrow'):

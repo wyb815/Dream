@@ -2,7 +2,7 @@
 
 [ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=2]
-[ext_resource path="res://game/objs/suck_frog/SuckFrog.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/objs/bubble/Bubble.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=5]
 
@@ -17,7 +17,10 @@ tile_data = PoolIntArray( -65526, 0, 2, -65525, 0, 2, -65524, 0, 2, -65523, 0, 2
 [node name="LevelCamera" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 5 )]
-position = Vector2( 701, -88 )
+position = Vector2( 383, -485 )
 
-[node name="SuckFrog" parent="." instance=ExtResource( 3 )]
-position = Vector2( 300, -124 )
+[node name="Bubble" parent="." instance=ExtResource( 3 )]
+position = Vector2( 183, -121 )
+
+[node name="Bubble2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 388, -122 )
