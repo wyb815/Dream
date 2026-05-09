@@ -69,6 +69,7 @@ ui_down={
 2d_physics/layer_1="common"
 2d_physics/layer_2="player"
 2d_physics/layer_3="balloon"
+2d_physics/layer_4="bubble"
 
 [physics]
 
