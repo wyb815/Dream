@@ -4,6 +4,7 @@ enum State {
 	Idle,
 	Attack,
 	ToneBack,
+	Rest, # 休息
 }
 
 var target_enter_time := -1.0
@@ -27,14 +28,15 @@ func _physics_process(delta: float):
 		_check_body(body)
 	
 
-func _check_body(body: Node2D):
+func _check_body(body: Node2D):	
 	if state != State.Idle:
 		# 攻击中
 		return
 		
-	if !BehaviorUtils.is_player(body):
+	if !BehaviorUtils.can_die(body):
 		# 不是玩家
 		return
+		
 	if (body.global_position - global_position).length() > (sensor.shape as CircleShape2D).radius * 2:
 		# 范围外
 		return
@@ -52,7 +54,7 @@ func _on_tone_body_entered(body: Node2D):
 		return
 		
 	# 找到玩家
-	if BehaviorUtils.is_player(body):
+	if BehaviorUtils.can_die(body):
 		catch_body = body
 		_tone_back()
 	
@@ -77,14 +79,21 @@ func _foo():
 
 # 舌头收回来
 func _tone_back():
+	if state == State.ToneBack:
+		return
 	state = State.ToneBack
 	_tone_move_to(global_position, TONE_BACK_SPEED, 0.5)
 
 func _on_tween_tween_all_completed():
 	if state == State.Attack:
 		_tone_back()
-	else:
+	elif state == State.Rest:
+		#休息结束
 		state = State.Idle
+	else:
+		state = State.Rest
+		tween.interpolate_callback(self, 0.2, '_foo')
+		tween.start()
 		if catch_body:
 			catch_body.die()
 			catch_body = null

@@ -4,18 +4,26 @@ const SPEED := 50
 
 export var move_left = true
 var direction := -1.0
-var velocity = Vector2()
+var velocity = Vector2.ZERO
 var up_dir := Vector2(0, -1)
+var born_pos: Vector2
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var rayCastL := $rayCastL as RayCast2D
 onready var rayCastR := $rayCastR as RayCast2D
 
 func _ready():
+	_reset_to_born()
+	born_pos = global_position
+	
+func _reset_to_born():
 	if move_left:
 		direction = -1.0
 	else:
 		direction = 1.0
+		
+	velocity = Vector2.ZERO
+
 
 func _physics_process(delta: float) -> void:	
 	if is_on_floor():
@@ -59,3 +67,7 @@ func _is_touching_wall() -> bool:
 		if abs(normal.x) > 0.5:  # 水平方向
 			return true
 	return false
+	
+func die():
+	global_position = born_pos
+	_reset_to_born()
