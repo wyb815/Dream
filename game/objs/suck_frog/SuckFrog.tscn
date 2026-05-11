@@ -23,4 +23,3 @@ shape = SubResource( 2 )
 
 [connection signal="body_entered" from="tone" to="." method="_on_tone_body_entered"]
 [connection signal="tween_all_completed" from="tween" to="." method="_on_tween_tween_all_completed"]
-[connection signal="tween_completed" from="tween" to="." method="_on_tween_tween_completed"]

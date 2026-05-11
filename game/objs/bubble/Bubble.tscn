@@ -19,7 +19,7 @@ one_way_collision = true
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 0
-wait_time = 0.1
+wait_time = 0.3
 one_shot = true
 
 [node name="life" type="Timer" parent="."]

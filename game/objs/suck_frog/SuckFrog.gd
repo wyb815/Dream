@@ -17,7 +17,7 @@ onready var tone := $tone as Area2D
 onready var tween := $tween as Tween
 onready var sensor := $sensor as CollisionShape2D
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	if catch_body:
 		catch_body.global_position = tone.global_position
 		return
