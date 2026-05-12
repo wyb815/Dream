@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/objs/suck_frog/SuckFrog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/objs/copter/Copter.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/objs/goal/Goal.tscn" type="PackedScene" id=8]
+
+[node name="Lv" type="Node2D"]
+
+[node name="floor_tm" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -458754, 0, 65539, -458753, 0, 65539, -524288, 0, 65539, -524287, 0, 65539, -524286, 0, 65539, -524285, 0, 65539, -524284, 0, 65539, -524283, 0, 65539, -393218, 0, 65539, -393217, 0, 65539, -458752, 0, 65539, -458751, 0, 65539, -458750, 0, 65539, -458749, 0, 65539, -458748, 0, 65539, -458747, 0, 65539, -327682, 0, 65539, -262146, 0, 65539, -196610, 0, 65539, -262109, 0, 1, -131074, 0, 65539, -65538, 0, 65539, -2, 0, 65539, -65521, 0, 65539, -65515, 0, 65539, 65534, 0, 65539, 65535, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539 )
+
+[node name="arrow_tm" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( -589819, 0, 2, -589818, 0, 2, -589817, 0, 2, -589816, 0, 2, -589815, 0, 2, -589814, 0, 2, -589813, 0, 2, -589812, 0, 2, -589811, 0, 2, -589810, 0, 2, -589809, 0, 2, -589808, 0, 2, -589807, 0, 2, -589806, 0, 2, -589805, 0, 2, -589804, 0, 2, -589803, 0, 2, -589802, 0, 2, -589801, 0, 2, -589800, 0, 2, -589799, 0, 2, -589798, 0, 2, -589797, 0, 2, -196574, 0, 65539, -196573, 0, 65539, -196572, 0, 65539, -131038, 0, 65539, -131037, 0, 65539, -131036, 0, 65539, -65504, 0, 65539, -65503, 0, 65539, -65502, 0, 65539, -65501, 0, 65539, -65500, 0, 65539, 6, 0, 2, 7, 0, 2, 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 14, 0, 2, 15, 0, 2, 16, 0, 2, 17, 0, 2, 18, 0, 2, 19, 0, 2, 20, 0, 2, 21, 0, 2, 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 0, 2, 28, 0, 2, 29, 0, 2, 30, 0, 2, 31, 0, 2, 32, 0, 65539 )
+
+[node name="LevelCamera" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 69, -35 )
+
+[node name="SuckFrog" parent="." instance=ExtResource( 2 )]
+position = Vector2( 926, -164 )
+
+[node name="SuckFrog2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1274, -418 )
+
+[node name="SuckFrog3" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1582, -168 )
+
+[node name="Snail" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1820, -29 )
+
+[node name="Snail2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2011, -24 )
+
+[node name="Snail3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 662, -11 )
+
+[node name="Copter" parent="." instance=ExtResource( 7 )]
+position = Vector2( 448, -75 )
+
+[node name="Copter2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1258, -159 )
+
+[node name="Goal" parent="." instance=ExtResource( 8 )]
+position = Vector2( 2869, -284 )
