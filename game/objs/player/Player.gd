@@ -11,9 +11,10 @@ var follow_v := Vector2(0, 0)
 var is_on_platform := false
 var jump_apply_left_time := 0.0
 var born_pos := Vector2()
+
 # 冲击速度
 var apply_vels := []
-var is_in_apply_vel = false
+var is_in_apply_vel := false
 
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
@@ -22,7 +23,9 @@ onready var con = $con
 func _ready():
 	born_pos = global_position
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float) -> void:	
+	_check_collide()
+	
 	if is_follow:
 		_handle_follow()
 		return
@@ -53,14 +56,14 @@ func _physics_process(delta: float) -> void:
 				#松开跳跃键，跳的近一些
 				velocity.y *= 0.3
 				jump_apply_left_time = 0
-
-	_check_collide()
+				
 	# 外部施加的速度
 	if apply_vels.size() > 0:
 		is_in_apply_vel = true;
 		velocity = Vector2.ZERO
 		velocity = apply_vels[0]
 	apply_vels.clear();
+	
 	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 
 func _check_collide():
@@ -92,4 +95,10 @@ func die():
 	global_position = born_pos
 	is_follow = false
 	velocity = Vector2.ZERO
+	
+func get_ctrl_dir():
+	var input_dir = Vector2()
+	input_dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	return input_dir.normalized()  # 限制对角线移动速度，防止比轴向往移动更快
 	
