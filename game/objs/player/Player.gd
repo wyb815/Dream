@@ -87,7 +87,7 @@ func _handle_follow():
 		velocity.y = JUMP_VELOCITY * up_dir.y
 		is_follow = false
 		return
-	
+	 
 	velocity = follow_v
 	move_and_slide(velocity, up_dir)
 
@@ -99,6 +99,7 @@ func die():
 func get_ctrl_dir():
 	var input_dir = Vector2()
 	input_dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	return input_dir.normalized()  # 限制对角线移动速度，防止比轴向往移动更快
+#	input_dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_dir.y = -1.0 if Input.is_action_pressed("fly") else 0
+	return input_dir
 	
