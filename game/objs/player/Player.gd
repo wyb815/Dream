@@ -28,13 +28,15 @@ func _physics_process(delta: float) -> void:
 	
 	if is_follow:
 		_handle_follow()
-		return
+		if is_follow:
+			return
 	
 	if is_on_floor():
-		# 要把设成 0，才能站在蜗牛的头上
-		velocity.y = 0
+		if velocity.y > 0:
+			# 要把设成 0，才能站在蜗牛的头上
+			velocity.y = 0
 	else:
-		velocity.y += gravity * delta		
+		velocity.y += gravity * delta
 	
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
@@ -84,12 +86,13 @@ func _check_collide():
 func _handle_follow():
 	if Input.is_action_just_pressed("ui_accept"):
 		# 解除跟随
-		velocity.y = JUMP_VELOCITY * up_dir.y
 		is_follow = false
 		return
 	 
 	velocity = follow_v
-	move_and_slide(velocity, up_dir)
+	if velocity.y > 0 && is_on_floor():
+		velocity.y = 0
+	velocity = move_and_slide(velocity, up_dir)
 
 func die():
 	global_position = born_pos

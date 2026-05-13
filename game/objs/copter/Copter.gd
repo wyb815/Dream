@@ -1,7 +1,7 @@
 extends Area2D
 
 var x_speed := 200.0
-var y_speed := 100.0
+var y_speed := 200.0
 var ctrl_body: KinematicBody2D
 var pos_offset := Vector2(0, -20)
 var vel := Vector2.ZERO
@@ -12,6 +12,7 @@ onready var life_timer := $life_timer as Timer
 onready var reset_timer := $reset_timer as Timer
 
 func _ready():
+	set_process_priority(ProcessPriority.COPER)
 	born_pos = global_position
 	reset()
 	
