@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 		if !is_in_apply_vel || is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	if last_follow || Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept"):
 		if last_follow || is_on_floor():
 			jump_apply_left_time = 0.5
 			velocity.y = JUMP_VELOCITY * up_dir.y
