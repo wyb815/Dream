@@ -8,6 +8,8 @@ var up_dir := Vector2(0, -1)
 
 var is_follow := false
 var follow_v := Vector2(0, 0)
+var catch_by: Node2D
+
 var is_on_platform := false
 var jump_apply_left_time := 0.0
 var born_pos := Vector2()
@@ -84,10 +86,10 @@ func _check_collide():
 			apply_vels.append(collision.normal * collider.apply_speed)
 	
 func _handle_follow():
-	if Input.is_action_just_pressed("ui_accept"):
-		# 解除跟随
-		is_follow = false
-		return
+#	if Input.is_action_just_pressed("ui_accept"):
+#		# 解除跟随
+#		CatchRule.release_catch(self, null)
+#		return
 	 
 	velocity = follow_v
 	if velocity.y > 0 && is_on_floor():
@@ -96,13 +98,12 @@ func _handle_follow():
 
 func die():
 	global_position = born_pos
-	is_follow = false
+	CatchRule.release_catch(self, null)
 	velocity = Vector2.ZERO
 	
 func get_ctrl_dir():
 	var input_dir = Vector2()
 	input_dir.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-#	input_dir.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_dir.y = -1.0 if Input.is_action_pressed("fly") else 0
+	input_dir.y = -1.0 if Input.is_action_pressed("ui_accept") else 0.0
 	return input_dir
 	

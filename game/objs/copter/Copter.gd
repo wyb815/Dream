@@ -20,8 +20,10 @@ func reset():
 	global_position = born_pos
 	life_timer.stop()
 	lab_left_time.text = str(life_timer.wait_time)
+		
+func detach_ctrl():
 	if ctrl_body:
-		ctrl_body.is_follow = false;
+		CatchRule.release_catch(ctrl_body, self)
 		ctrl_body = null
 
 func _refresh_lab():
@@ -33,37 +35,35 @@ func _physics_process(delta: float):
 		
 	if not ctrl_body:
 		for body in get_overlapping_bodies():
-			if is_instance_valid(body):
-				_on_Copter_body_entered(body)
-				if ctrl_body:
-					break
+			_on_Copter_body_entered(body)
+			if ctrl_body:
+				break
 			
 	
 	if ctrl_body:
-		if ctrl_body.is_follow || life_timer.is_stopped():
-			var dir = ctrl_body.get_ctrl_dir() as Vector2
+		var dir = ctrl_body.get_ctrl_dir() as Vector2
+		
+		vel.x = dir.x * x_speed
+		vel.y += ctrl_body.gravity * delta
+		
+		global_position = ctrl_body.global_position + pos_offset
+		
+		if dir.y != 0:
+			vel.y = dir.y * y_speed
+		
+		ctrl_body.follow_v = vel
 			
-			vel.x = dir.x * x_speed
-			vel.y += ctrl_body.gravity * delta
-			
-			global_position = ctrl_body.global_position + pos_offset
-			
-			if dir.y != 0:
-				vel.y = dir.y * y_speed
-			
-			ctrl_body.follow_v = vel
-		else:
-			_on_die()
+func _on_combine():
+	_on_die()
 
 func _on_Copter_body_entered(body: KinematicBody2D):
-	if ctrl_body:
-		return
-	if is_instance_valid(body) && 'is_follow' in body:
-		body.is_follow = true
+	if CatchRule.try_to_catch(body, self):
 		ctrl_body = body
 		ctrl_body.global_position = global_position - pos_offset
 		life_timer.start()
 
+func on_release_catch():
+	_on_die()
 
 func _on_life_timer_timeout():
 	_on_die()
@@ -71,6 +71,7 @@ func _on_life_timer_timeout():
 func _on_die():
 	visible = false
 	set_physics_process(false)
+	detach_ctrl()
 	reset()
 	reset_timer.start()
 
