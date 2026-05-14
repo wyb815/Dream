@@ -18,6 +18,8 @@ var born_pos := Vector2()
 var apply_vels := []
 var is_in_apply_vel := false
 
+var record_follow = false;
+
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
 onready var con = $con
@@ -25,7 +27,10 @@ onready var con = $con
 func _ready():
 	born_pos = global_position
 
-func _physics_process(delta: float) -> void:	
+func _physics_process(delta: float) -> void:
+	var last_follow = record_follow
+	record_follow = is_follow
+	
 	_check_collide()
 	
 	if is_follow:
@@ -48,8 +53,8 @@ func _physics_process(delta: float) -> void:
 		if !is_in_apply_vel || is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
-	if Input.is_action_just_pressed("ui_accept"):
-		if is_on_floor():
+	if last_follow || Input.is_action_just_pressed("ui_accept"):
+		if last_follow || is_on_floor():
 			jump_apply_left_time = 0.5
 			velocity.y = JUMP_VELOCITY * up_dir.y
 	else:
@@ -86,11 +91,6 @@ func _check_collide():
 			apply_vels.append(collision.normal * collider.apply_speed)
 	
 func _handle_follow():
-#	if Input.is_action_just_pressed("ui_accept"):
-#		# 解除跟随
-#		CatchRule.release_catch(self, null)
-#		return
-	 
 	velocity = follow_v
 	if velocity.y > 0 && is_on_floor():
 		velocity.y = 0

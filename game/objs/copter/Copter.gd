@@ -52,9 +52,6 @@ func _physics_process(delta: float):
 			vel.y = dir.y * y_speed
 		
 		ctrl_body.follow_v = vel
-			
-func _on_combine():
-	_on_die()
 
 func _on_Copter_body_entered(body: KinematicBody2D):
 	if CatchRule.try_to_catch(body, self):

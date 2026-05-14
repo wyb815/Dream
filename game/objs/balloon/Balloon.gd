@@ -35,7 +35,7 @@ func _physics_process(delta):
 				catched_by_area.get_parent().follow_v = Vector2.ZERO
 		else:
 			if catched_by_area:
-				catched_by_area.get_parent().is_follow = false;
+				CatchRule.release_catch(catched_by_area.get_parent(), self)
 				catched_by_area = null
 			position = start_pos
 			is_start_move = false
@@ -53,30 +53,30 @@ func _physics_process(delta):
 		reach_stay_time = 0.3
 		
 	if catched_by_area:
-		if catched_by_area.get_parent().is_follow:
-			# 拖着走
-			catched_by_area.get_parent().follow_v = final_vel
-		else:
-			catched_by_area = null
+		catched_by_area.get_parent().follow_v = final_vel
+		if BehaviorUtils.is_player(catched_by_area.get_parent()):
+			if Input.is_action_just_pressed("ui_accept"):
+				on_release_catch()
 
 func _on_Area2D_area_entered(area: Area2D):
 	if catched_by_area:
 		# 已经有被抓住了
 		return
 	
-	if area.name == 'hand':
+	if area.name == 'hand' && CatchRule.try_to_catch(area.get_parent(), self):
 		catched_by_area = area
-		catched_by_area.get_parent().is_follow = true
 		_fix_body_pos()
 		is_start_move = true
 
 func _on_Area2D_area_exited(area: Area2D):
 	if catched_by_area == area:
-		catched_by_area.get_parent().is_follow = false;
-		catched_by_area = null
+		on_release_catch()
 
 func _fix_body_pos():
 	var global_offset = handle.global_position - catched_by_area.global_position
 	
 	catched_by_area.get_parent().global_position += global_offset
 	
+func on_release_catch():
+	CatchRule.release_catch(catched_by_area.get_parent(), self)
+	catched_by_area = null
