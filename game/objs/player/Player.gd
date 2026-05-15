@@ -1,18 +1,11 @@
 extends KinematicBody2D
 
-
-const SPEED = 300.0
-const JUMP_VELOCITY = 580.0
-var velocity = Vector2()
-var up_dir := Vector2(0, -1)
-
 var is_follow := false
 var follow_v := Vector2(0, 0)
 var catch_by: Node2D
 
-var is_on_platform := false
 var jump_apply_left_time := 0.0
-var born_pos := Vector2()
+
 
 # 冲击速度
 var apply_vels := []
@@ -23,9 +16,7 @@ var record_follow = false;
 onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var move_body = $move
 onready var con = $con
-
-func _ready():
-	born_pos = global_position
+onready var move_rule = $move_rule
 
 func _physics_process(delta: float) -> void:
 	var last_follow = record_follow
@@ -38,42 +29,37 @@ func _physics_process(delta: float) -> void:
 		if is_follow:
 			return
 	
-	if is_on_floor():
-		if velocity.y > 0:
-			# 要把设成 0，才能站在蜗牛的头上
-			velocity.y = 0
-	else:
-		velocity.y += gravity * delta
+	move_rule.handle_gravity(delta)
 	
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		is_in_apply_vel = false
-		velocity.x = direction * SPEED
+		move_rule.velocity.x = direction * move_rule.move_speed
 	else:
 		if !is_in_apply_vel || is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			move_rule.velocity.x = move_toward(move_rule.velocity.x, 0, move_rule.move_speed)
 		
 	if Input.is_action_just_pressed("ui_accept"):
 		if last_follow || is_on_floor():
 			jump_apply_left_time = 0.5
-			velocity.y = JUMP_VELOCITY * up_dir.y
+			move_rule.velocity.y = move_rule.jump_speed * move_rule.up_dir.y
 	else:
 		if jump_apply_left_time > 0:
 			if Input.is_action_pressed("ui_accept"):
 				jump_apply_left_time -= delta
 			else:
 				#松开跳跃键，跳的近一些
-				velocity.y *= 0.3
+				move_rule.velocity.y *= 0.3
 				jump_apply_left_time = 0
 				
 	# 外部施加的速度
 	if apply_vels.size() > 0:
 		is_in_apply_vel = true;
-		velocity = Vector2.ZERO
-		velocity = apply_vels[0]
+		move_rule.velocity = Vector2.ZERO
+		move_rule.velocity = apply_vels[0]
 	apply_vels.clear();
 	
-	velocity = move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
+	move_rule.move();
 
 func _check_collide():
 	for i in range(get_slide_count()):
@@ -91,15 +77,14 @@ func _check_collide():
 			apply_vels.append(collision.normal * collider.apply_speed)
 	
 func _handle_follow():
-	velocity = follow_v
-	if velocity.y > 0 && is_on_floor():
-		velocity.y = 0
-	velocity = move_and_slide(velocity, up_dir)
+	move_rule.velocity = follow_v
+	if move_rule.velocity.y > 0 && is_on_floor():
+		move_rule.velocity.y = 0
+	move_rule.velocity = move_and_slide(move_rule.velocity, move_rule.up_dir)
 
 func die():
-	global_position = born_pos
+	move_rule.reset_to_ready()
 	CatchRule.release_catch(self, null)
-	velocity = Vector2.ZERO
 	
 func get_ctrl_dir():
 	var input_dir = Vector2()

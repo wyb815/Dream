@@ -19,6 +19,7 @@ config/icon="res://icon.png"
 BehaviorUtils="*res://game/utils/BehaviorUtils.gd"
 ProcessPriority="*res://game/utils/ProcessPriority.gd"
 CatchRule="*res://game/utils/CatchRule.gd"
+MoveRule="*res://game/objs/rules/move_rule/MoveRule.gd"
 
 [display]
 
