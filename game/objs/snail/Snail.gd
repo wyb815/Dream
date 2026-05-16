@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 	move_rule.handle_gravity(delta)
 	
 	if is_on_floor():
-		if _check_on_cliff():
+		if move_rule.is_on_cliff():
 			# 遇到悬崖走反方向
 			move_rule.direction = -move_rule.direction
 	
@@ -32,19 +32,5 @@ func _physics_process(delta: float) -> void:
 	move_rule.handle_move_speed()
 	move_rule.move()
 
-func _check_on_cliff() -> bool:
-	# --- 悬崖检测逻辑 ---
-	var is_on_cliff = false
-	# 如果玩家正要移动
-	if move_rule.velocity.x != 0:
-		# 判断移动方向的射线是否没有碰到地面
-		if move_rule.velocity.x < 0:
-			if not rayCastL.is_colliding():
-				is_on_cliff = true
-		else:
-			if not rayCastR.is_colliding():
-				is_on_cliff = true
-	return is_on_cliff
-	
 func die():
 	_reset_to_born()
