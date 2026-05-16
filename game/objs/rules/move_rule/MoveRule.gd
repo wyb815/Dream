@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name MoveRule
+
 var velocity: Vector2
 var gravity := 980
 var up_dir := Vector2.UP
@@ -14,8 +16,7 @@ onready var body := get_parent() as KinematicBody2D
 
 func _ready():
 	init_dir = direction
-	if body:
-		born_pos = body.global_position
+	born_pos = body.global_position
 	
 func reset_to_ready():
 	direction = init_dir

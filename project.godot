@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "MoveRule",
+"language": "GDScript",
+"path": "res://game/objs/rules/move_rule/MoveRule.gd"
+} ]
+_global_script_class_icons={
+"MoveRule": ""
+}
+
 [application]
 
 config/name="Dream"
@@ -19,7 +29,6 @@ config/icon="res://icon.png"
 BehaviorUtils="*res://game/utils/BehaviorUtils.gd"
 ProcessPriority="*res://game/utils/ProcessPriority.gd"
 CatchRule="*res://game/utils/CatchRule.gd"
-MoveRule="*res://game/objs/rules/move_rule/MoveRule.gd"
 
 [display]
 
