@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const BALLON = -100
 const WHEELS = -100

@@ -2,9 +2,6 @@ extends KinematicBody2D
 
 export var move_to_left := true
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-onready var rayCastL := $rayCastL as RayCast2D
-onready var rayCastR := $rayCastR as RayCast2D
 onready var move_rule := $move_rule as MoveRule
 
 func _ready():

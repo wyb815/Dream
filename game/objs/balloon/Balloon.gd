@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export(NodePath) var balloon_end
 
-var catched_by_area: Area2D
+var catched_by: MoveRule
 var move_speed := 200.0
 var vel := Vector2()
 var end_pos: Vector2
@@ -29,14 +29,15 @@ func _physics_process(delta):
 	var target_pos = get_parent().to_local(end_pos)
 			
 	if target_pos == position:
+		# 到达终点
 		if reach_stay_time > 0:
 			reach_stay_time -= delta
-			if catched_by_area:
-				catched_by_area.get_parent().follow_v = Vector2.ZERO
+			if catched_by:
+				catched_by.follow_v = Vector2.ZERO
 		else:
-			if catched_by_area:
-				CatchRule.release_catch(catched_by_area.get_parent(), self)
-				catched_by_area = null
+			if catched_by:
+				catched_by.release_catch(self)
+				catched_by = null
 			position = start_pos
 			is_start_move = false
 		return
@@ -52,31 +53,37 @@ func _physics_process(delta):
 		final_vel = move_and_slide(move_offset / delta, Vector2.UP)
 		reach_stay_time = 0.3
 		
-	if catched_by_area:
-		catched_by_area.get_parent().follow_v = final_vel
-		if BehaviorUtils.is_player(catched_by_area.get_parent()):
+	if catched_by:
+		catched_by.follow_v = final_vel
+		if BehaviorUtils.is_player(catched_by.body):
 			if Input.is_action_just_pressed("ui_accept"):
 				on_release_catch()
 
 func _on_Area2D_area_entered(area: Area2D):
-	if catched_by_area:
+	if catched_by:
 		# 已经有被抓住了
 		return
 	
-	if area.name == 'hand' && CatchRule.try_to_catch(area.get_parent(), self):
-		catched_by_area = area
-		_fix_body_pos()
-		is_start_move = true
+	if area.name == 'hand' && 'move_rule' in area.get_parent():
+		var move_rule = area.get_parent().move_rule as MoveRule
+		if move_rule.try_to_catch(self):
+			move_rule.set_meta('hand', area)
+			catched_by= move_rule
+			_fix_body_pos()
+			is_start_move = true
 
 func _on_Area2D_area_exited(area: Area2D):
-	if catched_by_area == area:
+	if !catched_by:
+		return
+	if area.get_parent() == catched_by.body:
 		on_release_catch()
 
 func _fix_body_pos():
-	var global_offset = handle.global_position - catched_by_area.global_position
+	var global_offset = handle.global_position - catched_by.get_meta('hand').global_position
 	
-	catched_by_area.get_parent().global_position += global_offset
+	catched_by.get_meta('hand').get_parent().global_position += global_offset
 	
 func on_release_catch():
-	CatchRule.release_catch(catched_by_area.get_parent(), self)
-	catched_by_area = null
+	if catched_by:
+		catched_by.release_catch(self)
+		catched_by = null

@@ -33,15 +33,12 @@ position = Vector2( 1482, -212 )
 
 [node name="Snail" parent="." instance=ExtResource( 5 )]
 position = Vector2( 609, -14 )
-move_left = false
 
 [node name="Snail2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 711, -14 )
-move_left = false
 
 [node name="Snail3" parent="." instance=ExtResource( 5 )]
 position = Vector2( 508, -14 )
-move_left = false
 
 [node name="BubbleGen" parent="." instance=ExtResource( 7 )]
 position = Vector2( 2681, 211 )

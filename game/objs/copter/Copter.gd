@@ -2,7 +2,7 @@ extends Area2D
 
 var x_speed := 200.0
 var y_speed := 200.0
-var ctrl_body: KinematicBody2D
+var ctrl_body: MoveRule
 var pos_offset := Vector2(0, -20)
 var vel := Vector2.ZERO
 var born_pos: Vector2
@@ -23,7 +23,7 @@ func reset():
 		
 func detach_ctrl():
 	if ctrl_body:
-		CatchRule.release_catch(ctrl_body, self)
+		ctrl_body.release_catch(self)
 		ctrl_body = null
 
 func _refresh_lab():
@@ -41,7 +41,7 @@ func _physics_process(delta: float):
 			
 	
 	if ctrl_body:
-		var dir = ctrl_body.get_ctrl_dir() as Vector2
+		var dir = ctrl_body.body.get_ctrl_dir() as Vector2
 		
 		vel.x = dir.x * x_speed
 		vel.y += ctrl_body.gravity * delta
@@ -54,9 +54,12 @@ func _physics_process(delta: float):
 		ctrl_body.follow_v = vel
 
 func _on_Copter_body_entered(body: KinematicBody2D):
-	if CatchRule.try_to_catch(body, self):
-		ctrl_body = body
-		ctrl_body.global_position = global_position - pos_offset
+	if !'move_rule' in body:
+		return
+	
+	if body.move_rule.try_to_catch(self):
+		ctrl_body = body.move_rule
+		ctrl_body.body.global_position = global_position - pos_offset
 		life_timer.start()
 
 func on_release_catch():

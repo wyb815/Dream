@@ -1,11 +1,6 @@
 extends KinematicBody2D
 
-var is_follow := false
-var follow_v := Vector2(0, 0)
-var catch_by: Node2D
-
 var jump_apply_left_time := 0.0
-
 
 # 冲击速度
 var apply_vels := []
@@ -13,20 +8,17 @@ var is_in_apply_vel := false
 
 var record_follow = false;
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-onready var move_body = $move
-onready var con = $con
-onready var move_rule = $move_rule
+onready var move_rule := $move_rule as MoveRule
 
 func _physics_process(delta: float) -> void:
 	var last_follow = record_follow
-	record_follow = is_follow
+	record_follow = move_rule.is_follow
 	
 	_check_collide()
 	
-	if is_follow:
-		_handle_follow()
-		if is_follow:
+	if move_rule.is_follow:
+		move_rule.follow()
+		if move_rule.is_follow:
 			return
 	
 	move_rule.handle_gravity(delta)
@@ -75,16 +67,10 @@ func _check_collide():
 			die()
 		if groups.has('apply_vel'):
 			apply_vels.append(collision.normal * collider.apply_speed)
-	
-func _handle_follow():
-	move_rule.velocity = follow_v
-	if move_rule.velocity.y > 0 && is_on_floor():
-		move_rule.velocity.y = 0
-	move_rule.velocity = move_and_slide(move_rule.velocity, move_rule.up_dir)
 
 func die():
+	move_rule.release_catch(null)
 	move_rule.reset_to_ready()
-	CatchRule.release_catch(self, null)
 	
 func get_ctrl_dir():
 	var input_dir = Vector2()
