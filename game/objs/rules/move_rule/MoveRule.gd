@@ -75,7 +75,7 @@ func set_catch(catch_by: Node2D):
 		if self.catch_by:
 			self.catch_by.on_release_catch()
 		self.catch_by = catch_by
-	self.is_follow = true
+	is_follow = true
 	
 func release_catch(catch_by: Node2D):
 	var self_catch_by = self.catch_by
