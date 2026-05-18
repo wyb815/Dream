@@ -17,12 +17,16 @@ export var move_speed := 200.0
 export var jump_speed := 580.0
 
 onready var body := get_parent() as KinematicBody2D
-onready var ray_l := get_parent().get_node('ray_l')
-onready var ray_r := get_parent().get_node('ray_r')
+onready var ray_l := get_parent().get_node('ray_l') as RayCast2D
+onready var ray_r := get_parent().get_node('ray_r') as RayCast2D
+onready var platform := get_parent().get_node('platform') as KinematicBody2D
 
 func _ready():
 	init_dir = direction
 	born_pos = body.global_position
+	if platform:
+		body.get_parent().add_child(platform)
+		platform.add_collision_exception_with(body)
 	
 func reset_to_ready():
 	direction = init_dir
@@ -30,11 +34,11 @@ func reset_to_ready():
 	body.global_position = born_pos
 
 func handle_gravity(delta: float):
+	# 重力
 	if body.is_on_floor():
 		if velocity.y > 0:
 			velocity.y = 0
 	else:
-		# 重力
 		velocity.y += gravity * delta
 		
 func handle_move_speed():
@@ -43,44 +47,44 @@ func handle_move_speed():
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 
+func sync_platform_pos():
+	if platform:
+		platform.global_position = body.global_position
+
 func move():
 	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
+	sync_platform_pos()
 	
 func follow():
 	velocity = follow_v
 	if velocity.y > 0 && body.is_on_floor():
 		velocity.y = 0
 	velocity = body.move_and_slide(velocity, up_dir)
+	sync_platform_pos()
 
-func is_on_cliff() -> bool:
+func is_on_cliff_l() -> bool:
 	# --- 悬崖检测逻辑 ---
-	var is_on_cliff = false
-	# 如果玩家正要移动
-	if velocity.x != 0:
-		# 判断移动方向的射线是否没有碰到地面
-		if velocity.x < 0:
-			if not ray_l.is_colliding():
-				is_on_cliff = true
-		else:
-			if not ray_r.is_colliding():
-				is_on_cliff = true
-	return is_on_cliff
+	return not ray_l.is_colliding()
+	
+func is_on_cliff_r() -> bool:
+	# --- 悬崖检测逻辑 ---
+	return not ray_r.is_colliding()
 
-func try_to_catch(catch_by: Node2D):
-	set_catch(catch_by)
+func try_to_catch(_catch_by: Node2D):
+	set_catch(_catch_by)
 	return true
 	
-func set_catch(catch_by: Node2D):
-	if self.catch_by != catch_by:
-		if self.catch_by:
-			self.catch_by.on_release_catch()
-		self.catch_by = catch_by
+func set_catch(_catch_by: Node2D):
+	if catch_by != _catch_by:
+		if catch_by:
+			catch_by.on_release_catch()
+		catch_by = _catch_by
 	is_follow = true
 	
-func release_catch(catch_by: Node2D):
-	var self_catch_by = self.catch_by
-	if self_catch_by && (!catch_by || self_catch_by == catch_by):
+func release_catch(_catch_by: Node2D):
+	var self_catch_by = catch_by
+	if self_catch_by && (!_catch_by || self_catch_by == _catch_by):
 		is_follow = false
-		self.catch_by = null
+		catch_by = null
 		self_catch_by.on_release_catch()
 	

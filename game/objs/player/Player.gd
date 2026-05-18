@@ -10,6 +10,9 @@ var record_follow = false;
 
 onready var move_rule := $move_rule as MoveRule
 
+func _ready():
+	set_process_priority(ProcessPriority.PLAYER)
+
 func _physics_process(delta: float) -> void:
 	var last_follow = record_follow
 	record_follow = move_rule.is_follow

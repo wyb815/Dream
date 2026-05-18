@@ -106,6 +106,8 @@ fly={
 2d_physics/layer_2="player"
 2d_physics/layer_3="balloon"
 2d_physics/layer_4="bubble"
+2d_physics/layer_5="platform"
+2d_physics/layer_6="move_body"
 
 [physics]
 
