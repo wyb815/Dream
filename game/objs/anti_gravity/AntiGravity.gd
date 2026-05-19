@@ -39,5 +39,5 @@ func on_anti_gravity(move_rule: MoveRule, is_anti: bool):
 	if is_anti:
 		move_rule.body.scale.y = -1
 	else:
-		move_rule.body.scale.y = 1 
+		move_rule.body.scale.y = 1
 	move_rule.body.move_and_slide(Vector2.ZERO, move_rule.up_dir)

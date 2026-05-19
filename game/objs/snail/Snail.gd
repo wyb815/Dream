@@ -20,18 +20,21 @@ func _reset_direction():
 func _physics_process(delta: float) -> void:	
 	move_rule.handle_gravity(delta)
 	
+	if move_rule.direction == 0:
+		_reset_direction()
+	
 	if is_on_floor():
 		var l = move_rule.is_on_cliff_l()
 		var r = move_rule.is_on_cliff_r()
 		
 		if l || r:
-			if !l || !r:
-				move_rule.direction = -move_rule.direction
+			if l:
+				move_rule.direction = 1.0
+			elif r:
+				move_rule.direction = -1.0
 			else:
 				move_rule.direction = 0
-		else:
-			if move_rule.direction == 0:
-				_reset_direction()
+			
 				
 	if is_on_wall() && move_rule.direction:
 		# 碰到墙

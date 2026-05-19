@@ -11,6 +11,7 @@ var born_pos: Vector2
 var is_follow := false
 var follow_v := Vector2(0, 0)
 var catch_by: Node2D
+var stand_on_platforms := {}
 
 export var direction := 0.0
 export var move_speed := 200.0
@@ -25,8 +26,8 @@ func _ready():
 	init_dir = direction
 	born_pos = body.global_position
 	if platform:
-		body.get_parent().add_child(platform)
 		platform.add_collision_exception_with(body)
+		platform.set_meta('move_rule', self)
 	
 func reset_to_ready():
 	direction = init_dir
@@ -35,11 +36,7 @@ func reset_to_ready():
 
 func handle_gravity(delta: float):
 	# 重力
-	if body.is_on_floor():
-		if velocity.y > 0:
-			velocity.y = 0
-	else:
-		velocity.y += gravity * delta
+	velocity.y += gravity * delta
 		
 func handle_move_speed():
 	if direction:
@@ -48,17 +45,17 @@ func handle_move_speed():
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 
 func sync_platform_pos():
-	if platform:
-		platform.global_position = body.global_position
+	pass
+#	if platform:
+#		platform.global_position = body.global_position
 
 func move():
-	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
+	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 0), up_dir)
 	sync_platform_pos()
+	_check_collide()
 	
 func follow():
 	velocity = follow_v
-	if velocity.y > 0 && body.is_on_floor():
-		velocity.y = 0
 	velocity = body.move_and_slide(velocity, up_dir)
 	sync_platform_pos()
 
@@ -87,4 +84,25 @@ func release_catch(_catch_by: Node2D):
 		is_follow = false
 		catch_by = null
 		self_catch_by.on_release_catch()
+		
+func _check_collide():
+	for move_rule in stand_on_platforms:
+		(move_rule as MoveRule).body.remove_collision_exception_with(body)
 	
+	for i in range(body.get_slide_count()):
+		var collision = body.get_slide_collision(i)
+		var collider := collision.collider as PhysicsBody2D
+		
+		if !is_instance_valid(collider):
+			continue
+		
+		var groups = collider.get_groups()
+	
+		if collider.name == 'platform':
+			if up_dir.y < 0 && collision.normal.y < -0.5 || up_dir.y > 0 && collision.normal.y > 0.5:
+				var move_rule = collider.get_meta('move_rule') as MoveRule
+				
+				if move_rule:
+					move_rule.body.add_collision_exception_with(body)
+					stand_on_platforms.set(move_rule, true)
+		
