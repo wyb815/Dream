@@ -28,14 +28,13 @@ func _physics_process(delta: float) -> void:
 		var r = move_rule.is_on_cliff_r()
 		
 		if l || r:
-			if l:
-				move_rule.direction = 1.0
-			elif r:
-				move_rule.direction = -1.0
-			else:
+			if l && r:
 				move_rule.direction = 0
-			
-				
+			elif l:
+				move_rule.direction = 1.0
+			else:
+				move_rule.direction = -1.0
+	
 	if is_on_wall() && move_rule.direction:
 		# 碰到墙
 		move_rule.direction = -move_rule.direction
