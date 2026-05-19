@@ -5,3 +5,4 @@ const WHEELS = -100
 const BENG = -200
 const PLAYER = 1
 const COPER = 100
+const SUCK_FROG = 100
