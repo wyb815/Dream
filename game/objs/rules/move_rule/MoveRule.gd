@@ -44,20 +44,14 @@ func handle_move_speed():
 	else:
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 
-func sync_platform_pos():
-	pass
-#	if platform:
-#		platform.global_position = body.global_position
-
 func move():
-	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 0), up_dir)
-	sync_platform_pos()
+	var snapY = -up_dir.y * 2.0 if body.is_on_floor() else 0
+	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	_check_collide()
 	
 func follow():
 	velocity = follow_v
 	velocity = body.move_and_slide(velocity, up_dir)
-	sync_platform_pos()
 
 func is_on_cliff_l() -> bool:
 	# --- 悬崖检测逻辑 ---
