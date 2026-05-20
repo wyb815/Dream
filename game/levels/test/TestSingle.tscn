@@ -4,8 +4,12 @@
 [ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=2]
 [ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=4]
-[ext_resource path="res://game/objs/snail/Snail.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/objs/wheels/Wheels.tscn" type="PackedScene" id=6]
+[ext_resource path="res://game/objs/roll_car/RollCarPathFollow.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Curve2D" id=4]
+_data = {
+"points": PoolVector2Array( -244.422, -68.7029, 244.422, 68.7029, -9, 5, -97.769, 43.5989, 97.769, -43.5989, 369, -57, 0, 0, 0, 0, 614, -49 )
+}
 
 [node name="TestSingle" type="Node2D"]
 
@@ -18,29 +22,12 @@ tile_data = PoolIntArray( -65526, 0, 2, -65525, 0, 2, -65524, 0, 2, -65523, 0, 2
 [node name="LevelCamera" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 678, -222 )
+position = Vector2( 314, -114 )
 
-[node name="Snail5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 381, -255 )
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 59, -200 )
+curve = SubResource( 4 )
 
-[node name="Snail8" parent="." instance=ExtResource( 5 )]
-position = Vector2( 381, -255 )
-
-[node name="Snail9" parent="." instance=ExtResource( 5 )]
-position = Vector2( 737, -207 )
-
-[node name="Snail10" parent="." instance=ExtResource( 5 )]
-position = Vector2( 382, -342 )
-
-[node name="Snail11" parent="." instance=ExtResource( 5 )]
-position = Vector2( 381, -299 )
-
-[node name="Snail6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 383, -212 )
-
-[node name="Snail7" parent="." instance=ExtResource( 5 )]
-position = Vector2( 387, -173 )
-
-[node name="Wheels" parent="." instance=ExtResource( 6 )]
-position = Vector2( 870, -442 )
-count = 6
+[node name="RollCarPathFollow" parent="Path2D" instance=ExtResource( 6 )]
+position = Vector2( -9, 5 )
+speed = 200.0
