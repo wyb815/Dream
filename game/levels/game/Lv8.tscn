@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://game/terrain_objs/floor/floor_tm.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game/objs/roll_car/RollCarPathFollow.tscn" type="PackedScene" id=2]
+[ext_resource path="res://game/objs/player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://game/camera/LevelCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/objs/suck_frog/SuckFrog.tscn" type="PackedScene" id=5]
+[ext_resource path="res://game/terrain_objs/arrow/arrow_tm.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 719, -63, -150.423, 59.5599, 150.423, -59.5599, 1059, -123, -115.851, 63.8642, 115.851, -63.8642, 1332, -259, -8.09752, 114.553, 8.09752, -114.553, 1700, -581, 113.623, 63.4176, -113.623, -63.4176, 1566, -830, 75.3084, -107.017, -75.3084, 107.017, 1199, -783, -80.5932, -120.229, 80.5932, 120.229, 1183, -445, -267.642, -46.3893, 267.642, 46.3893, 1775, -240, -162.508, 33.03, 162.508, -33.03, 2163, -239, -91.1628, 113.623, 91.1628, -113.623, 2772, -461, 48.8844, 72.666, -48.8844, -72.666, 2789, -856, 124.193, -34.3512, -124.193, 34.3512, 2430, -1008, -10.5696, -182.326, 10.5696, 182.326, 2138, -695, -88.5204, -50.2056, 88.5204, 50.2056, 2313, -404, -103.072, 137.75, 103.072, -137.75, 3375, -256 )
+}
+
+[node name="Lv" type="Node2D"]
+
+[node name="floor_tm" parent="." instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -196563, 0, 65539, -196562, 0, 65539, -196561, 0, 65539, -196560, 0, 65539, -196559, 0, 65539, -196558, 0, 65539, -196557, 0, 65539, -196556, 0, 65539, -196555, 0, 65539, -196554, 0, 65539, -196553, 0, 65539, -196552, 0, 65539, 0, 0, 65539, 1, 0, 65539, 2, 0, 65539, 3, 0, 65539, 4, 0, 65539, 5, 0, 65539, 6, 0, 65539, 7, 0, 65539 )
+
+[node name="arrow_tm" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 8, 0, 2, 9, 0, 2, 10, 0, 2, 11, 0, 2, 12, 0, 2, 13, 0, 2, 14, 0, 2, 15, 0, 2, 16, 0, 2, 17, 0, 2, 18, 0, 2, 19, 0, 2, 20, 0, 2, 21, 0, 2, 22, 0, 2, 23, 0, 2, 24, 0, 2, 25, 0, 2, 26, 0, 2, 27, 0, 2, 28, 0, 2, 29, 0, 2, 30, 0, 2, 31, 0, 2, 32, 0, 2, 33, 0, 2, 34, 0, 2, 35, 0, 2, 36, 0, 2, 37, 0, 2, 38, 0, 2, 39, 0, 2, 40, 0, 2, 41, 0, 2, 42, 0, 2, 43, 0, 2, 44, 0, 2, 45, 0, 2, 46, 0, 2, 47, 0, 2, 48, 0, 2, 49, 0, 2, 50, 0, 2 )
+
+[node name="LevelCamera" parent="." instance=ExtResource( 4 )]
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 69, -35 )
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2( 7, 3 )
+curve = SubResource( 1 )
+
+[node name="RollCarPathFollow" parent="Path2D" instance=ExtResource( 2 )]
+position = Vector2( 719, -63 )
+speed = 300.0
+
+[node name="SuckFrog" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1412, -1030 )
+
+[node name="SuckFrog2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2487, -1098 )

@@ -30,4 +30,3 @@ curve = SubResource( 4 )
 
 [node name="RollCarPathFollow" parent="Path2D" instance=ExtResource( 6 )]
 position = Vector2( -9, 5 )
-speed = 200.0

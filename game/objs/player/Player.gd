@@ -1,6 +1,10 @@
 extends KinematicBody2D
 
+class_name Player
+
 var jump_apply_left_time := 0.0
+
+signal on_die
 
 # 冲击速度
 var apply_vels := []
@@ -74,6 +78,7 @@ func _check_collide():
 func die():
 	move_rule.release_catch(null)
 	move_rule.reset_to_ready()
+	emit_signal('on_die')
 	
 func get_ctrl_dir():
 	var input_dir = Vector2()
