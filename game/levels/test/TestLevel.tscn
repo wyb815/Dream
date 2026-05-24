@@ -23,12 +23,12 @@ tile_data = PoolIntArray( -589829, 0, 2, -524293, 0, 65539, -524292, 0, 65539, -
 tile_data = PoolIntArray( -11, 0, 2, -10, 0, 2, -9, 0, 2, -8, 0, 2 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 319, -20 )
+position = Vector2( 318, -40 )
 
 [node name="LevelCamera" parent="." instance=ExtResource( 3 )]
 
 [node name="Snail" parent="." instance=ExtResource( 4 )]
-position = Vector2( 85, -6 )
+position = Vector2( 328, -186 )
 
 [node name="AntiGravity" parent="." instance=ExtResource( 5 )]
 position = Vector2( 978, -1307 )
@@ -61,7 +61,31 @@ position = Vector2( 3595, 520 )
 position = Vector2( -849, 236 )
 
 [node name="Snail5" parent="." instance=ExtResource( 4 )]
-position = Vector2( 85, -46 )
+position = Vector2( 295, -221 )
+
+[node name="Snail7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 294, -145 )
+
+[node name="Snail8" parent="." instance=ExtResource( 4 )]
+position = Vector2( 336, -108 )
+
+[node name="Snail9" parent="." instance=ExtResource( 4 )]
+position = Vector2( 294, -103 )
+
+[node name="Snail10" parent="." instance=ExtResource( 4 )]
+position = Vector2( 333, -151 )
+
+[node name="Snail11" parent="." instance=ExtResource( 4 )]
+position = Vector2( -660, -84 )
+
+[node name="Snail12" parent="." instance=ExtResource( 4 )]
+position = Vector2( -593, -78 )
+
+[node name="Snail13" parent="." instance=ExtResource( 4 )]
+position = Vector2( 328, -231 )
+
+[node name="Snail14" parent="." instance=ExtResource( 4 )]
+position = Vector2( 295, -184 )
 
 [node name="Snail6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 60, -729 )
