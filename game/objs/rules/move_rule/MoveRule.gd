@@ -3,6 +3,7 @@ extends Node2D
 class_name MoveRule
 
 var velocity: Vector2
+var last_vel: Vector2
 var gravity := 980
 var up_dir := Vector2.UP
 var init_dir: float
@@ -12,6 +13,7 @@ var is_follow := false
 var follow_v := Vector2(0, 0)
 var catch_by: Node2D
 var stand_on_platforms := {}
+var wall_dir_x := 0.0
 
 export var direction := 0.0
 export var move_speed := 200.0
@@ -45,12 +47,23 @@ func handle_move_speed():
 		velocity.x = move_toward(velocity.x, 0, move_speed)
 
 func move():
+	if !direction && body.is_on_floor():
+		var floor_vel = body.get_floor_velocity()
+
+		# 移动平台上和移动平台水平速度相反需要特殊处理
+		if floor_vel.x != 0 && floor_vel.x * velocity.x < 0:
+			if body.test_move(body.transform, Vector2(-floor_vel.x * get_physics_process_delta_time(), 0)):
+				velocity.x = 0
+	
 	var snapY = -up_dir.y * 2.0 if body.is_on_floor() else 0
+	
+	last_vel = velocity
 	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
 	_check_collide()
 	
 func follow():
 	velocity = follow_v
+	last_vel = velocity
 	velocity = body.move_and_slide(velocity, up_dir)
 
 func is_on_cliff_l() -> bool:
@@ -100,3 +113,17 @@ func _check_collide():
 					move_rule.body.add_collision_exception_with(body)
 					stand_on_platforms.set(move_rule, true)
 		
+func is_on_wall():
+	if body.is_on_floor():
+		var floor_vel = body.get_floor_velocity()
+		
+		# 移动平台上和移动平台水平速度相反需要特殊处理
+		if floor_vel.x != 0 and floor_vel.x * direction < 0:
+			if body.test_move(body.transform, Vector2(-floor_vel.x * get_physics_process_delta_time(), 0)):
+				wall_dir_x = -floor_vel.x
+				return true
+	
+	wall_dir_x = last_vel.x
+	if body.is_on_floor():
+		wall_dir_x += body.get_floor_velocity().x
+	return body.is_on_wall()		
