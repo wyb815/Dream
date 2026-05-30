@@ -110,6 +110,7 @@ func _check_collide():
 				var move_rule = collider.get_meta('move_rule') as MoveRule
 				
 				if move_rule:
+					# 不能和站在上面的物体进行碰撞，这样可以跳起来
 					move_rule.body.add_collision_exception_with(body)
 					stand_on_platforms.set(move_rule, true)
 		
