@@ -11,4 +11,10 @@ func find_player() -> Player:
 	return null
 	
 func can_die(node: Node2D):
+	if !is_instance_valid(node):
+		return false
 	return node.has_method('die')
+	
+func set_to_die(node: Node2D):
+	if can_die(node):
+		node.die()
