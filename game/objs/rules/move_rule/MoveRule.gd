@@ -55,10 +55,10 @@ func move():
 			if body.test_move(body.transform, Vector2(-floor_vel.x * get_physics_process_delta_time(), 0)):
 				velocity.x = 0
 	
-	var snapY = -up_dir.y * 2.0 if body.is_on_floor() else 0
+	var snapY = -up_dir.y * 2.0 if body.is_on_floor() else 0.0
 	
 	last_vel = velocity
-	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, -up_dir.y * 2.0), up_dir)
+	velocity = body.move_and_slide_with_snap(velocity, Vector2(0, snapY), up_dir)
 	_check_collide()
 	
 func follow():
@@ -102,8 +102,6 @@ func _check_collide():
 		
 		if !is_instance_valid(collider):
 			continue
-		
-		var groups = collider.get_groups()
 	
 		if collider.name == 'platform':
 			if up_dir.y < 0 && collision.normal.y < -0.5 || up_dir.y > 0 && collision.normal.y > 0.5:
